@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4291ab18-467d-4fbf-b39c-521f465e9dce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/requirements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/aggiorna_DB.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/aggiorna_DB.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +114,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "developement",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/GIT/LearnPython/Backend",
     "node.js.detected.package.eslint": "true",
@@ -128,6 +129,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\GIT\LearnPython\Backend" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GIT\LearnPython\.github\workflows" />
     </key>
   </component>
   <component name="SharedIndexes">

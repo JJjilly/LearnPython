@@ -2,12 +2,16 @@ name: Aggiorna Database
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # ogni 6 ore
-  workflow_dispatch:         # permette lancio manuale
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   aggiorna:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
     steps:
       - uses: actions/checkout@v4
 
