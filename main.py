@@ -13,16 +13,21 @@ from pytickersymbols import PyTickerSymbols
 from supabase import create_client, Client
 import psycopg2
 import alpaca_trade_api as tradeapi
+from alpaca.trading.client import TradingClient
+from alpaca.trading.requests import GetAssetsRequest
 import base64
 import requests
 
 load_dotenv()
-AlpacaAPI = tradeapi.REST('PKFF2W2FF6GN6YAKZKPSZNJV6U', 'BygFhuW5kAZ7eUtrL7ka1sS9LaM7dXMo2fn6q36Zg87x', base_url='https://paper-api.alpaca.markets' )
-assets = AlpacaAPI.list_assets()
-
 
 supabase : Client = create_client(os.environ["supabaseUrl"],os.environ["supabaseKey"])
+alpaca = TradingClient(
+    os.environ["ALPACA_KEY"],
+    os.environ["ALPACA_SECRET"],
+    paper=True
+)
 
+assets = alpaca.get_all_assets()
 
 cursor = psycopg2.connect(os.getenv("DATABASE_URL"))
 curs = cursor.cursor()

@@ -3,7 +3,7 @@ yfinance
 pandas
 supabase
 psycopg2-binary
-alpaca-trade-api
+alpaca-py
 requests
 pytickersymbols
 alpha_vantage
