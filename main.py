@@ -39,6 +39,7 @@ for asset in assets:
 #with cursor.cursor() as curs:
 #    curs.execute("Insert into companies (company, ticker) VALUES ('microsoft','MSFT')")
 #    curs.execute("Delete From companies")
+#Ho aggiunto ON CONFLICT (ticker) DO NOTHING nell'INSERT — così se un ticker esiste già non da errore ma lo salta, evitando duplicati.
 
 
 
