@@ -1,29 +1,20 @@
 import os
-from logging import exception
-
-import pytickersymbols
-from dotenv import load_dotenv
-import yfinance
-import yfinance as yf
-import pandas as pd
-from datetime import datetime, timedelta
-
-from pycparser.c_ast import If
-from pytickersymbols import PyTickerSymbols
-from supabase import create_client, Client
-import psycopg2
-import alpaca_trade_api as tradeapi
-from alpaca.trading.client import TradingClient
-from alpaca.trading.requests import GetAssetsRequest
 import base64
 import requests
+import psycopg2
+import pandas as pd
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+from pytickersymbols import PyTickerSymbols
+from supabase import create_client, Client
+from alpaca.trading.client import TradingClient
 
 load_dotenv()
 
-supabase : Client = create_client(os.environ["supabaseUrl"],os.environ["supabaseKey"])
+supabase: Client = create_client(os.environ["supabaseUrl"], os.environ["supabaseKey"])
 alpaca = TradingClient(
-    os.environ["ALPACA_KEY"],
-    os.environ["ALPACA_SECRET"],
+    os.environ.get("ALPACA_KEY", ""),
+    os.environ.get("ALPACA_SECRET", ""),
     paper=True
 )
 
@@ -34,18 +25,15 @@ curs = cursor.cursor()
 
 for asset in assets:
     try:
-       if asset.status == 'active'and asset.tradable:
-           curs.execute("Insert into companies (company, ticker) VALUES (%s,%s)", (asset.name, asset.symbol))
-
+        if asset.status == 'active' and asset.tradable:
+            curs.execute(
+                "INSERT INTO companies (company, ticker) VALUES (%s, %s) ON CONFLICT (ticker) DO NOTHING",
+                (asset.name, asset.symbol)
+            )
     except Exception as e:
         print(asset.symbol)
         print(e)
 
-#with cursor.cursor() as curs:
-#    curs.execute("Insert into companies (company, ticker) VALUES ('microsoft','MSFT')")
-#    curs.execute("Delete From companies")
-#Ho aggiunto ON CONFLICT (ticker) DO NOTHING nell'INSERT — così se un ticker esiste già non da errore ma lo salta, evitando duplicati.
-
-
-
 cursor.commit()
+curs.close()
+cursor.close()
