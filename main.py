@@ -11,7 +11,7 @@ from alpaca.trading.client import TradingClient
 
 load_dotenv()
 
-supabase: Client = create_client(os.environ["supabaseUrl"], os.environ["supabaseKey"])
+supabase: Client = create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
 alpaca = TradingClient(
     os.environ.get("ALPACA_KEY", ""),
     os.environ.get("ALPACA_SECRET", ""),
