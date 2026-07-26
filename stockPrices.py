@@ -9,10 +9,8 @@ from psycopg2.extras import DictCursor
 from pytickersymbols import PyTickerSymbols
 from supabase import create_client, Client
 from alpaca.trading.client import TradingClient
-import alpaca_trade_api as tradeapi
 import yfinance as yf
 import main
-from alpaca_trade_api import TimeFrame
 
 load_dotenv()
 #Setup connection with supabase db
@@ -23,7 +21,6 @@ alpaca = TradingClient(
     os.environ.get("ALPACA_SECRET", ""),
     paper=True
 )
-api = tradeapi.REST(os.environ.get("ALPACA_KEY", ""),os.environ.get("ALPACA_SECRET", ""),base_url=os.environ.get("ALPACA_URL"))
 assets = alpaca.get_all_assets()
 #Connect to supabase using postgre so You can use cursor, otherwise you use superbase client
 cursor = psycopg2.connect(os.getenv("DATABASE_URL"))
@@ -39,11 +36,17 @@ rows = curs.fetchall()
 symbols = [row["ticker"] for row in rows]
 
 for ticker in symbols:
-    stock = yf.Ticker(ticker)
-    data = stock.history()
-    info = stock.fast_info
-    last_quote = info.last_price
-    print(ticker, last_quote)
+    try:
+        ticker = yf.Ticker(ticker)
+        info = ticker.info
+        # Verifica che il ticker sia valido prima di usarlo
+        if not info or info.get('regularMarketPrice') is None:
+            print(f"Ticker non valido o delistato: {ticker}")
+            continue
+        last_quote = info.last_price
+    except Exception as e:
+        print(f"Errore su {ticker}: {e}")
+        continue
 
 
 
