@@ -7,3 +7,4 @@ alpaca-py
 requests
 pytickersymbols
 alpha_vantage
+fastapi

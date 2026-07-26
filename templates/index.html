@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyViewInvest</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+    <h1>Stock List</h1>
+
+    <TABLE>
+    {% for ticker in ticker %}
+    <TR>
+        <TD>{{ ticker.ticker }}</TD>
+        <TD>{{ ticker.company }}</TD>
+    </TR>
+
+
+    {% endfor %}
+    </TABLE>
+</body>
+</html>
+
